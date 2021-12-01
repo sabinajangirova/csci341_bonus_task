@@ -1,0 +1,382 @@
+{% extends 'default.html' %}
+
+{% block content%}
+
+<script>
+    // function query1(){
+    //     $.get( "api/query1", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['disease code']}</th><th>${el['description']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+
+    // function query2(){
+    //     $.get( "api/query2", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['name']}</th><th>${el['surname']}</th><th>${el['degree']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+
+    // function query3(){
+    //     $.get( "api/query3", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['name']}</th><th>${el['surname']}</th><th>${el['degree']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+    // function query4(){
+    //     $.get( "api/query4", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['cname']}</th><th>${el['average']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+
+    // function query5(){
+    //     $.get( "api/query5", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['department']}</th><th>${el['count']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+
+    // function query6(){
+    //     $.ajax({
+    //         url:'api/query6',
+    //         method:'PUT'
+    //     }).done(function(data){
+    //         $("#query_results").html(`<h3>${data}</h3>`);
+    //     });
+    // }
+
+    // function query7(){
+    //     $.ajax({
+    //         url:'api/query7',
+    //         method:'DELETE'
+    //     }).done(function(data){
+    //         $("#query_results").html(`<h3>${data}</h3>`);
+    //     });
+    // }
+
+    // function query8(){
+    //     $.ajax({
+    //         url:'api/query8',
+    //         method:'PUT'
+    //     }).done(function(data){
+    //         $("#query_results").html(`<h3>${data}</h3>`);
+    //     });
+    // }
+
+    // function query9(){
+    //     $.get( "api/query9", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['email']}</th><th>${el['name']}</th><th>${el['department']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+
+    // function query10(){
+    //     $.get( "api/query10", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['cname']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+
+    // function query11(){
+    //     $.get( "api/query11", function( data ) {
+    //         var html = '<table class="table table-dark table-striped"><thead><tr>';
+    //         Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+    //         html += '</tr></thead><tbody>'
+    //         data.forEach(el => html += `<tr><th>${el['disease code']}</th><th>${el['pathogen']}</th><th>${el['description']}</th><th>${el['id']}</th><th>${el['treated_patients']}</th></tr>`)
+    //         html += '</tbody></table>'
+    //         $("#query_results").html(html);
+    //     }, "json");
+    // }
+</script>
+
+<div class="container-fluid">
+    <div class="row justify-content-evenly"><h3 class="m-5 text-center">Statistics</h3></div>
+    <div class="row justify-content-evenly">
+        <div class="m-5 list-group col-md-12 col-sm-12 col-xs-12">
+            <div class="row justify-content-evenly">
+                <div class=" m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>Rank countries by death rate (percentage) of patients from the chosen disease</p>
+                    <form action="/statistics/death_rate" method="post">
+                        {% csrf_token %}
+                        {% for field in death_rate_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="Rank countries">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in rank_death_rate %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>Rank countries by the percentage of patients of a chosen disease (patients/population)</p>
+                    <form action="/statistics/patients_rate" method="post">
+                        {% csrf_token %}
+                        {% for field in patients_rate_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="Rank countries">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in patients_rate %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>Rank countries by the number of doctors who specialize in a chosen disease type</p>
+                    <form action="/statistics/doctor_number" method="post">
+                        {% csrf_token %}
+                        {% for field in doctor_number_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="Rank countries">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in doctor_number %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>Rank countries by average salary</p>
+                    <form action="/statistics/average_salary" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-dark" type="submit" value="Rank countries">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in average_salary %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>List the disease code and the description of diseases that are caused by the chosen pathogen and were discovered before the specified date</p>
+                    <form action="/statistics/pathogen_date" method="post">
+                        {% csrf_token %}
+                        {% for field in pathogen_date_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="List">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in pathogen_date %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>List the name, surname and degree of doctors who are not specialized in the chosen disease type</p>
+                    <form action="/statistics/not_specialized" method="post">
+                        {% csrf_token %}
+                        {% for field in not_specialized_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="List">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in not_specialized %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>List the name, surname and degree of doctors who are specialized in more than chosen number of disease types</p>
+                    <form action="/statistics/more_disease_types" method="post">
+                        {% csrf_token %}
+                        {% for field in more_disease_types_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="List">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in more_disease_types %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>For each country list the cname and average salary of doctors who are specialized in the chosen disease type</p>
+                    <form action="/statistics/salary_specialize" method="post">
+                        {% csrf_token %}
+                        {% for field in salary_specialize_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="List">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in salary_specialize %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>List the departments of public servants who report the chosen disease cases in more than one country and the number of such public servants who work in these departments</p>
+                    <form action="/statistics/disease_public_servant" method="post">
+                        {% csrf_token %}
+                        {% for field in disease_public_servant_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="List">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in disease_public_servant %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>List the email, name, and department of public servants who have created records where the number of patients is between the specified range</p>
+                    <form action="/statistics/records_range" method="post">
+                        {% csrf_token %}
+                        {% for field in records_range_form %}
+                            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+                        {% endfor %}
+                        <input class="btn btn-dark" type="submit" value="List">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in records_range %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>Get the number of illnesses of each type by country</p>
+                    <form action="/statistics/group_by_disease_type" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-dark" type="submit" value="Group by disease type">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in group_by_disease_type %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row justify-content-evenly">
+                <div class="m-3 col-md-4 col-sm-4 col-xs-12">
+                    <p>Rank pathogens by the death rate</p>
+                    <form action="/statistics/rank_pathogens" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-dark" type="submit" value="Rank pathogens">
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol class="list-group">
+                        {% for c in rank_pathogens %}
+                            <li class="list-group-item">
+                                {{c}}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

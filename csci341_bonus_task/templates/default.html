@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/53135a482e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>CSCI 341 Bonus Task</title>
+</head>
+<body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">CSCI 341 HW2</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Tables
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/country">Country</a></li>
+                    <li><a class="dropdown-item" href="/department">Department</a></li>
+                    <li><a class="dropdown-item" href="/discover">Discover</a></li>
+                    <li><a class="dropdown-item" href="/disease">Disease</a></li>
+                    <li><a class="dropdown-item" href="/disease_type">DiseaseType</a></li>
+                    <li><a class="dropdown-item" href="/doctor">Doctor</a></li>
+                    <li><a class="dropdown-item" href="/public_servant">PublicServant</a></li>
+                    <li><a class="dropdown-item" href="/record">Record</a></li>
+                    <li><a class="dropdown-item" href="/specialize">Specialize</a></li>
+                    <li><a class="dropdown-item" href="/user">Users</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/statistics">Statistics</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    {% block content %}
+        replace me
+    {% endblock %}
+
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-3 pb-0">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+      
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-2" href="https://www.instagram.com/sabina.jangirova/" role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+      
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-2" href="https://www.linkedin.com/in/sabina-jangirova/" role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+      
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-2" href="https://github.com/sabinajangirova/" role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2021 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/">Sabina Jangirova</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+</body>
+</html>

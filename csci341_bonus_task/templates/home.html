@@ -1,0 +1,156 @@
+{% extends 'default.html' %}
+
+{% block content%}
+
+<script>
+    function query1(){
+        $.get( "api/query1", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['disease code']}</th><th>${el['description']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+
+    function query2(){
+        $.get( "api/query2", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['name']}</th><th>${el['surname']}</th><th>${el['degree']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+
+    function query3(){
+        $.get( "api/query3", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['name']}</th><th>${el['surname']}</th><th>${el['degree']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+    function query4(){
+        $.get( "api/query4", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['cname']}</th><th>${el['average']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+
+    function query5(){
+        $.get( "api/query5", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['department']}</th><th>${el['count']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+
+    function query6(){
+        $.ajax({
+            url:'api/query6',
+            method:'PUT'
+        }).done(function(data){
+            $("#query_results").html(`<h3>${data}</h3>`);
+        });
+    }
+
+    function query7(){
+        $.ajax({
+            url:'api/query7',
+            method:'DELETE'
+        }).done(function(data){
+            $("#query_results").html(`<h3>${data}</h3>`);
+        });
+    }
+
+    function query8(){
+        $.ajax({
+            url:'api/query8',
+            method:'PUT'
+        }).done(function(data){
+            $("#query_results").html(`<h3>${data}</h3>`);
+        });
+    }
+
+    function query9(){
+        $.get( "api/query9", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['email']}</th><th>${el['name']}</th><th>${el['department']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+
+    function query10(){
+        $.get( "api/query10", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['cname']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+
+    function query11(){
+        $.get( "api/query11", function( data ) {
+            var html = '<table class="table table-dark table-striped"><thead><tr>';
+            Object.getOwnPropertyNames(data[0]).forEach(a => html += `<th scope="col">${a}</th>`)
+            html += '</tr></thead><tbody>'
+            data.forEach(el => html += `<tr><th>${el['disease code']}</th><th>${el['pathogen']}</th><th>${el['description']}</th><th>${el['id']}</th><th>${el['treated_patients']}</th></tr>`)
+            html += '</tbody></table>'
+            $("#query_results").html(html);
+        }, "json");
+    }
+</script>
+
+<div class="container-fluid">
+    <div class="row justify-content-evenly">
+        <div class="m-5 list-group col-md-5 col-sm-5 col-xs-12">
+            <a onclick="query1()" class="btn list-group-item list-group-item-action">
+                List the disease code and the description of diseases that are caused by “bacteria” (pathogen) and were discovered before 1990
+            </a>
+            <a onclick="query2()" class="btn list-group-item list-group-item-action">List the name, surname and degree of doctors who are not specialized in “infectious diseases”</a>
+            <a onclick="query3()" class="btn list-group-item list-group-item-action" >List the name, surname and degree of doctors who are specialized in more than 2 disease types.</a>
+            <a onclick="query4()" class="btn list-group-item list-group-item-action" >For each country list the cname and average salary of doctors who are specialized in “virology”.</a>
+            <a onclick="query5()" class="btn list-group-item list-group-item-action" >List the departments of public servants who report “covid-19” cases in more than one country and the number of such public servants who work in these departments. (i.e “Dept1 3” means that in the “Dept1” department there are 3 such employees.)</a>
+            <a onclick="query6()" class="btn list-group-item list-group-item-action" >
+                Double the salary of public servants who have recorded covid-19 patients more than 3 times.
+            </a>
+            <a onclick="query7()" class="btn list-group-item list-group-item-action" >
+                Delete the users whose surname contain the substring “bek” (e.g. Alibek, bek)
+            </a>
+            <a onclick="query8()" class="btn list-group-item list-group-item-action" >
+                Create an index namely “idx pathogen” on the “pathogen” field.
+            </a>
+            <a onclick="query9()" class="btn list-group-item list-group-item-action" >
+                List the email, name, and department of public servants who have created records where the number of patients is between 100000 and 999999
+            </a>
+            <a onclick="query10()" class="btn list-group-item list-group-item-action" >
+                List the top 5 counties with the highest number of total patients recorded
+            </a>
+            <a onclick="query11()" class="btn list-group-item list-group-item-action" >
+                Group the diseases by disease type and the total number of patients treated
+            </a>
+        </div>
+        
+        <div class="m-5 col-md-5 col-sm-5 col-xs-12" id="query_results">
+            <h3>Here results of you queries will be displayed</h3>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'default.html' %}
+
+{% block content%}
+
+<div class="col-md-6 col-sm-6 col-xs-10">
+    <form action="/doctor/edit/{{doctor.email.email}}" method="post" class="post-form">
+        {% csrf_token %}
+        <h3>Update {{doctor.email.email}}</h3>
+        {% for field in form %}
+            <div class="row"><div class='col-md-3 col-sm-3 col-xs-12'>{{field.label}}</div><div class='col-md-9 col-sm-9 col-xs-12'>{{field}}</div></div>
+        {% endfor %}
+        <input class="btn btn-dark" type="submit" value="Update doctor">
+    </form>
+</div>
+{% endblock %}
